@@ -1,0 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
+
+@font-face {
+    font-family: 'vazir';
+    src: url(../css/fonts/Vazir.ttf)format('truetype'),
+    url(../css/fonts/Vazir.woff2)format('woff2');
+}
+
+@font-face {
+    font-family: 'lalehzar';
+    src: url(../css/fonts/Lalezar-Regular.ttf)format('truetype'),
+    url(../css/fonts/AnyConv.com__Lalezar-Regular.woff2)format('woff2');
+}
+
+
+*{
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    /* background-color: #10375C; */
+    /* background-color: #740938; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sec1{
+    width: 30%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #caf0f8;
+    border-radius: 1rem;
+    border: #0077b6 3px solid;
+}    
+
+.sec1 .login-p{
+    font-family: "vazir";
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 10%;
+    user-select: none;
+}
+
+
+.sec1 .entry{
+    width: 80%;
+    height: 25%;
+    /* background-color: #F3C623; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sec1 .entry .box{
+    width: 100%;
+    height: 50%;
+    /* background-color: #00b4d8; */
+    /* border: 3px solid #0077b6; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    outline: none;
+    align-items: start;
+}
+
+
+
+.sec1 .entry .p1{
+    font-family: "vazir";
+    font-weight: 500;
+    color: black;
+    font-size: 1.5rem;
+    user-select: none;
+}
+
+.sec1 .entry .p1.action{
+    font-family: "vazir";
+    /* color:#F3C623; */
+    color: black;
+    font-size: .8rem;
+}
+
+.sec1 .entry .p2{
+    font-family: "vazir";
+    font-weight: 500;
+    color: black;
+    font-size: 1.5rem;
+    user-select: none;
+}
+
+.sec1 .entry .p2.action{
+    font-family: "vazir";
+    /* color: #F3C623; */
+    color: black;
+    font-size: .8rem;
+}
+
+.sec1 .entry .p3{
+    font-family: "vazir";
+    /* color: aliceblue; */
+    color: transparent;
+    
+}
+
+.sec1 .entry .p3.action{
+    font-family: "vazir";
+    color: #F3C623;
+    font-size: .8rem;
+}
+
+.sec1 .entry .input1{
+    width: 100%;
+    background-color: transparent;
+    /* background-color: greenyellow; */
+    scroll-behavior: none;
+    height: 50%;
+    /* margin-right: 5%; */
+    outline: none;
+    border: 2px solid #03045e;
+    color: black;
+    border-radius: .25rem;
+    padding-inline: .5rem;
+}
+
+
+
+.sec1 .entry .input2{
+    width: 100%;
+    background-color: transparent;
+    /* background-color: greenyellow; */
+    scroll-behavior: none;
+    height: 50%;
+    /* margin-right: 5%; */
+    outline: none;
+    border: 2px solid #03045e;
+    color: black;
+    border-radius: .25rem;
+    padding-inline: .5rem;
+}
+
+
+.sec1 .entry .input1::placeholder{
+    font-family: "vazir";
+    /* color: aliceblue; */
+    color: black;
+    font-size: 1rem;
+    margin-bottom: .25rem;
+    user-select: none;
+}
+
+.sec1 .entry .input1.action{
+    direction: ltr;
+    user-select: none;
+}
+
+.sec1 .entry .input1.action::placeholder{
+    color: transparent;
+    user-select: none;
+}
+
+.sec1 .entry .input2::placeholder{
+    font-family: "vazir";
+    /* color: aliceblue; */
+    color: black;
+    font-size: 1rem;
+    margin-bottom: .25rem;
+    user-select: none;
+}
+
+.sec1 .entry .input2.action::placeholder{
+    color: transparent;
+    user-select: none;
+}
+
+.sec1 .entry .input3::placeholder{
+    font-family: "vazir";
+    color: aliceblue;
+    font-size: 1.1rem;
+    margin-bottom: .25rem;
+}
+
+.sec1 .entry .input3.action::placeholder{
+    color: transparent;
+}
+
+.sec1 a{
+    width: 80%;
+    height: 10%;
+    /* background-color: #F3C623; */
+    background-color: #0077b6;
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: .5rem;
+}
+
+.sec1 a p{
+    font-family: "vazir";
+    font-size: 1.4rem;
+    color: #caf0f8;
+}
+
+.sec1 footer{
+    width: 80%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.sec1 footer p{
+    color: black;
+    font-family: "vazir";
+    cursor: pointer;
+    user-select: none;
+}

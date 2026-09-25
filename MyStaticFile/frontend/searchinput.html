@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>✨ Smooth expand-left search</title>
+  <!-- Separate CSS file -->
+  <link rel="stylesheet" href="./searchinput.css" />
+</head>
+<body>
+  <div class="search-wrapper">
+    <div class="search-card" id="searchCard" role="search">
+      <!-- icon -->
+      <span class="search-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+
+      <!-- input -->
+      <input 
+        type="text" 
+        class="search-input" 
+        id="searchInput" 
+        placeholder="Search for anything…" 
+        aria-label="Search"
+        autocomplete="off"
+      >
+
+      <!-- clear button -->
+      <button class="clear-btn" id="clearBtn" aria-label="Clear search">
+        <svg viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      <!-- search button -->
+      <button class="search-btn" id="searchBtn" aria-label="Submit search">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="M16.5 16.5L21 21"/>
+        </svg>
+        <span>جستجو</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const input = document.getElementById('searchInput');
+      const clearBtn = document.getElementById('clearBtn');
+      const searchBtn = document.getElementById('searchBtn');
+      const card = document.getElementById('searchCard');
+
+      // ----- helpers -----
+      function updateClearAndState() {
+        const hasText = input.value.trim().length > 0;
+        if (hasText) {
+          clearBtn.classList.add('visible');
+          card.classList.add('has-text');
+        } else {
+          clearBtn.classList.remove('visible');
+          card.classList.remove('has-text');
+        }
+      }
+
+      function clearSearch() {
+        input.value = '';
+        input.focus();
+        updateClearAndState();
+        searchBtn.classList.remove('loading');
+      }
+
+      function performSearch() {
+        const query = input.value.trim();
+        if (query === '') {
+          // gentle nudge
+          card.style.transition = 'transform 0.08s ease, width 0.55s cubic-bezier(0.23, 1, 0.32, 1)';
+          card.style.transform = 'scale(0.97)';
+          setTimeout(() => {
+            card.style.transform = '';
+          }, 120);
+          return;
+        }
+
+        searchBtn.classList.add('loading');
+        
+        setTimeout(() => {
+          searchBtn.classList.remove('loading');
+          console.log(`🔍 Searching for “${query}” … (demo)`);
+          
+          card.style.transition = 'border-color 0.15s ease, box-shadow 0.15s ease, width 0.55s cubic-bezier(0.23, 1, 0.32, 1)';
+          card.style.borderColor = 'rgba(31, 94, 255, 0.5)';
+          card.style.boxShadow = '0 0 0 2px rgba(31, 94, 255, 0.15), 0 28px 52px -12px rgba(0,80,200,0.2)';
+          setTimeout(() => {
+            card.style.borderColor = '';
+            card.style.boxShadow = '';
+          }, 400);
+          
+          input.focus();
+        }, 600);
+      }
+
+      // ----- event listeners -----
+      input.addEventListener('input', updateClearAndState);
+
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          performSearch();
+        }
+        if (e.key === 'Escape') {
+          if (input.value.trim() !== '') {
+            clearSearch();
+          } else {
+            input.blur();
+          }
+          e.preventDefault();
+        }
+      });
+
+      clearBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        clearSearch();
+      });
+
+      searchBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        performSearch();
+      });
+
+      // click on card background → focus input (but not on buttons)
+      card.addEventListener('click', function(e) {
+        if (!e.target.closest('.search-btn') && !e.target.closest('.clear-btn')) {
+          input.focus();
+        }
+      });
+
+      // initial state
+      updateClearAndState();
+
+      input.addEventListener('change', updateClearAndState);
+
+      console.log('✨ Smooth expand-left search ready');
+    })();
+  </script>
+</body>
+</html>

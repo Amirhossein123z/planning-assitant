@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+import re
+import os
+
+file_path = os.path.join('templates', 'homepage.html')
+with open(file_path, 'r', encoding='utf-8') as f:
+    text = f.read()
+
+# Replace src="..." with Django {% static %} tag
+text = re.sub(
+    r'src="([^"]*)"',
+    lambda m: f'src="{{% static \'{m.group(1)}\' %}}"',
+    text,
+)
+
+with open(file_path, 'w', encoding='utf-8') as f:
+    f.write(text)

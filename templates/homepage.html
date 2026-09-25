@@ -1,0 +1,875 @@
+{% load static %}
+{% load task_extras %}
+
+
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'frontend/main-page.css'%}">
+    <link rel="stylesheet" href="{% static 'frontend/task.css'%}">
+    <link rel="stylesheet" href="{% static 'frontend/searchinput.css'%}">
+
+    <link rel="stylesheet" href="{% static 'frontend/libs/persian-datepicker.min.css'%}">
+</head>
+{% load django_browser_reload %}
+{% django_browser_reload_script %}
+
+
+<body>
+    {% if messages %}
+        {% for message in messages %}
+
+            <div class="success-message">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+    {% endif %}
+
+    <div class="container">
+        <aside class="aside1 ">
+            
+            <div class="inneraside">
+
+                <header id="header">
+                    <!-- <img src="{% static '' %}" alt=""> -->
+                    <div class="profile">
+                        <div class="name">فضای کاری من
+                            <!-- <ul class="bar ">
+                                <div class="child child1">
+                                    <p>فضای کاری من</p>
+                                </div>
+                                <div class="child child2">
+                                    <img src="{% static 'frontend/img/settings_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                                </div>
+                                <div class="child child3">
+                                    <p>تنظیمات محیط کاری</p>
+                                </div>
+                                <div class="child child4">
+                                    <img src="{% static 'frontend/img/add_box_28dp_000000_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                                </div>
+                                <div class="child child5">
+                                    <p>ایجاد برنامه</p>
+                                </div>
+                            </ul> -->
+                        </div>
+                        <!-- <div class="arrow">
+                            <img src="{% static 'frontend/img/keyboard_arrow_down_30dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                        </div> -->
+                    </div>
+                </header>
+                <section class="section1">
+                    <div class="box">
+                        <div class="child child1">
+                            <div class="searchbox">
+                                <img src="{% static 'frontend/img/search_25dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                                <input type="search" class="search" placeholder="جستجو...">
+                            </div>
+                        </div>
+                        <div class="child child2">
+                            <div>فعالیت های من</div>
+                        </div>
+                        <div class="child child3"></div>
+                        <div class="child child4"></div>
+                        <div class="child child5"></div>
+                        <div class="child child6"></div>
+                        <div class="child child7"></div>
+                        <div class="child child8"></div>
+                        <div class="child child9"></div>
+                        <div class="child child10"></div>
+                        <div class="child child11"></div>
+                        <div class="child child12"></div>
+                    </div>
+                    <div class="arrowbox"></div>
+                    <img src="{% static 'frontend/img/chevron_right_16dp_0000F5.svg' %}" class="m-arrow" alt="">
+
+                </section>
+            </div>
+            
+            <section class="section2">
+                <section class="tool ">
+                    <!-- <header>تنظیمات</header> -->
+                    <div class="box ">
+                        <div class="child childplus duties" data-target="acc1">
+                            <img src="{% static 'frontend/img/check_box_44dp_000000_FILL0_wght0_GRAD0_opszNaN.svg' %}" alt="">
+                            <p  class="category " >تکالیف</p>
+                        </div>
+                        <!-- <div class="child update taghvim">
+                            <img src="{% static 'frontend/img/calendar_month_44dp_000000_FILL0_wght0_GRAD0_opsz48.svg' %}" alt="">
+                            <p  class="category ">یادداشت ها</p>
+                        </div> -->
+                        <div class="child update notebtn">
+                            <img src="{% static 'frontend/img/edit_note_44dp_000000_FILL0_wght0_GRAD0_opsz48.svg' %}" alt="">
+                            <p  class="category " >یادداشت </p>
+                        </div>
+                        
+                        
+                    </div>
+                    <footer class="footer">
+                        <img src="{% static 'frontend/img/chevron_right_16dp_0000F5.svg' %}" alt="" class="f-arrow ">
+                        <!-- <p class="p-footer ">مخفی</p> -->
+                    </footer>
+        
+                </section>
+            </section>
+            <section class="section3">
+                <div class="header">
+                    <div class="box1">
+                        
+                         <div class="search-wrapper">
+                            <form class="search-card" id="searchCard" role="search" method="get" action="{% url 'home' %}">
+
+                                <!-- icon -->
+                                <span class="search-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+
+                                <!-- input -->
+                                <input 
+                                    type="text" 
+                                    class="search-input" 
+                                    id="searchInput" 
+                                    placeholder="جستجو" 
+                                    aria-label="Search"
+                                    autocomplete="off"
+                                    name="q"
+                                    value="{{ search_query }}"
+                                >
+
+                                <!-- clear button -->
+                                <button class="clear-btn" id="clearBtn" aria-label="Clear search" type="button">
+                                    <svg viewBox="0 0 24 24">
+                                    <line x1="18" y1="6" x2="6" y2="18"/>
+                                    <line x1="6" y1="6" x2="18" y2="18"/>
+                                    </svg>
+                                </button>
+
+                                <!-- search button -->
+                                <button class="search-btn" id="searchBtn" aria-label="Submit search" type="submit">
+                                    <svg viewBox="0 0 24 24">
+                                    <circle cx="11" cy="11" r="7"/>
+                                    <path d="M16.5 16.5L21 21"/>
+                                    </svg>
+                                    <!-- <span>جستجو</span> -->
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box2">
+                        <div class="part1">
+                            <a href="" class="add">
+                                <p>اضافه کردن</p>
+                                <img src="{% static 'frontend/img/add_task_28dp_FFFFFF_FILL0_wght600_GRAD0_opsz24.png' %}" alt="">
+                            </a>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+               <div class="mainpart">
+                <div class="accordion" id="acc1" style="border-bottom: 2px solid gray; border-top: 2px solid gray;" >
+                    <div class="p1">تکالیف فعال</div>
+                    <div class="list ">
+                        <p>عنوان:</p>
+                        <p>دسته‌بندی:</p>
+                        <p>زمان‌بندی برای:</p>
+                        <p>زمان تخمینی:</p>
+                        <p>تاریخ سررسید:</p>
+                        
+                    </div>
+                    <div class="dir">
+                        <img src="{% static 'frontend/img/chevron_right_16dp_0000F5.svg' %}" alt="">
+                    </div>
+                
+                </div>
+                <div class="panel">
+                    <div class="content">
+                        {% for task in tasks %}
+                            <div class="title">
+                                <div class="child1">
+                                    <div class="text">{{ task.title }}</div>
+                                </div>
+                                <div class="child2">{{ task.category|category_persian }}</div>
+                                <div class="child3 schedule-date" data-date="{{ task.schedule }}">{{ task.schedule }}</div> 
+                                <div class="child4">
+                                    
+                                    {{ task.estimated_time|duration }} 
+                                    
+                                </div>
+                                <div class="child5">
+                                    
+                                    {% if task.due_date %}
+                                    
+                                    <span class="due-date" data-date="{{ task.due_date|date:"Y-m-d" }}">
+                                        
+                                        {{ task.due_date|date:"Y-m-d" }}
+                                        
+                                    </span>
+                                    
+                                    {% else %}
+                                    نامشخص
+                                    {% endif %}
+                                </div>
+                                <div class="child6">
+                                    <form action="{% url 'delete_task' task.id %}" method="post" class="delete-task-form">
+                                        {% csrf_token %}
+                                        <button type="submit" class="delete-btn">
+                                            <img src="{% static 'frontend/img/delete_26dp_EA3323_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="حذف">
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                
+                <div class="accordion "  style="border-bottom: 2px solid gray; border-top: 2px solid gray; " id="sec-acc" >
+                    <div class="p1">یادداشت های قبلی</div>
+                    <div class="list2 " >
+                        <p>عنوان:</p>
+                        <p>توضیحات:</p>
+                        
+                    </div>
+                    <div class="dir2">
+                        <img src="{% static 'frontend/img/chevron_right_16dp_0000F5.svg' %}" alt="">
+                    </div>
+                
+                </div>
+
+                <div class="panel panel2">
+
+                    <div class="content">
+                        {% for note in notes %}
+                            <div class="title2">
+                                <div class="child1" >
+                                    <!-- <img src="{% static 'frontend/img/movie_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg' %}" alt=""> -->
+                                    <div class="text">{{ note.title|slice:":10"}}{% if note.title|length > 10 %}...{% endif %}</div>
+                                </div>
+                                <div class="child2" >
+                                    <!-- <img src="{% static 'frontend/img/movie_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg' %}" alt=""> -->
+                                    <div class="text">{{ note.description|slice:":15" }}{% if note.description|length > 15 %}...{% endif %}</div>
+                                </div>
+
+                                <div class="child3">
+                                    <form action="{% url 'delete_note' note.id %}" method="post" class="delete-note-form">
+                                        {% csrf_token %}
+                                        <button type="submit">
+                                            <img src="{% static 'frontend/img/delete_26dp_EA3323_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="حذف">
+                                        </button>
+                                    </form>
+
+                                    
+                                </div>
+                                
+                            </div>
+                        {% endfor %}
+                       
+                    </div>
+                </div>
+               </div>
+      
+            </section>
+            
+        </aside>
+
+        <div class="blurbox ">
+            
+
+            <div class="blur-search">
+                <div class="part1">
+                    <p>جستجو</p>
+                    <form action="" method="post">
+                        <select name="blur-search"  class="blur-select">
+                            <option value="all">همه</option>
+                            <option value="sport">ورزشی</option>
+                            <option value="financial">مالی</option>
+                            <option value="education">درسی</option>
+                            
+                        </select>
+                    </form>
+                </div>
+                <div class="part2">
+
+                    <div class="searchpart">
+                        
+                        <div class="searchicon">
+                            
+                            <img src="{% static 'frontend/img/search_25dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                        </div>
+
+                        <input type="text">
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="blurbox2 {% if note_form.errors %}show{% endif %}">
+
+            <form action="{% url 'create_note' %}" method="post">
+
+            
+                {% csrf_token %}
+                <div class="notebox">
+                    <p class="header-p">یادداشت</p>
+                    <input type="text" placeholder="عنوان" class="noteinput1" dir="rtl" name="title">
+
+                    {% if note_form.errors %}
+                        <div class="error-messages">
+                            {{ note_form.title.errors.0 }}
+                        </div>
+                    {% endif %}
+
+                    <textarea name="description" id="note" placeholder="یادداشت"></textarea>
+                    <div class="note-btnbox">
+                        
+                        <button type="submit" class="savebtn">
+                            <p>ثبت</p>
+                        </button>
+                        <button class="note-backbtn" type="button" onclick="history.back()">
+                            <p>بازگشت</p>
+                        </button>
+    
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+
+
+        <div class="blurbox3 {% if form.errors %}show{% endif %}">
+
+            <form action="{% url 'create_task' %}" method="post" >
+
+                {% csrf_token %}
+                <div class="taskbox">
+            
+                    <div class="part1">
+                        <header class="taskheader">
+                            <h1>ایجاد فعالیت</h1>
+                        </header>
+                        <div class="taskbody">
+                            
+                                <div class="form-group1">
+                                    <label for="title" class="form-label">عنوان فعالیت:</label>
+                                    <input type="text" id="title" name="title" class="form-input" placeholder="عنوان را وارد کنید" >
+                                    {% if form.title.errors %}
+                                        <div class="error-messages">
+                                            {{ form.title.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group2">
+                                    <label for="description" class="form-label">توضیحات:</label>
+                                    <textarea id="description" name="description" class="form-textarea" placeholder="توضیحات را وارد کنید"></textarea>
+                                </div>
+                                
+                                <div class="buttons-container">
+                                    <button type="submit" class="submit-btn">ایجاد</button>
+                                    <button type="button"  class="back-btn" onclick="history.back()">بازگشت</button>
+                                </div>
+                            <!-- </form> -->
+                        </div>
+                    </div>
+
+            
+                    <div class="part2">
+                        <!-- <div class="form-group">
+                            <label for="create-in">ایجاد در:</label>
+                            <select id="create-in" name="create-in">
+                                <option value="my workspace">خودم</option>
+                                <option value="other workspace">سایر</option>
+                            </select>
+                        </div> -->
+
+                        <div class="form-group">
+                            <label for="category">دسته‌بندی:</label>
+                            <select name="category" id="category">
+                                <option value="study">درسی</option>
+                                <option value="sport">ورزشی</option>
+                                <option value="financial">مالی</option>
+                                <option value="other">سایر</option>
+                            </select>
+                        </div>
+
+                        <!-- <div class="form-group">
+                            <label for="status">وضعیت:</label>
+                            <select name="status" id="status">
+                                <option value="newtask">فعالیت جدید</option>
+                                <option value="scheduled">برنامه‌ریزی شده</option>
+                                <option value="in-progress">در حال انجام</option>
+                                <option value="completed">تمام شده</option>
+                            </select>
+                        </div> -->
+
+                        
+                        <div class="form-group">
+                            <label for="schedule">زمان‌بندی این فعالیت برای:</label>
+                            <div class="schedule-box" id="schedule-picker">
+                                <div class="schedule-indicator">
+                                    <p id="schedule-display">امروز</p>
+                                </div>
+                                <img src="{% static 'frontend/img/calendar-date.svg' %}" alt="">
+                            </div>
+                            <input type="hidden" id="schedule" name="schedule" class="cal-input">
+
+                            {% if form.schedule.errors %}
+
+                                <div class="error-messages">
+                                    {{ form.schedule.errors.0 }}
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                        
+
+                        <div class="form-group ">
+                            <label for="estimated_time">زمان تخمینی:</label>
+
+                            <div class="time-box">
+                                <input
+                                    type="number"
+                                    list="time-options"
+                                    id="estimated_time"
+                                    name="estimated_time"
+                                    class="form-input est-form-input"
+                                    placeholder="مثلاً 45 (دقیقه)">
+
+                                <img src="{% static 'frontend/img/hourglass-split.svg' %}" alt="time icon">
+                            </div>
+
+                            
+
+                            {% if form.estimated_time.errors %}
+
+                                <div class="error-messages">
+                                    {{ form.estimated_time.errors.0 }}
+                                </div>
+                                <!-- <div class="error-messages">
+                                    {{ form.estimated_time.errors.0 }}
+                                </div> -->
+                            {% endif %}
+
+                            <datalist id="time-options">
+                                <option value="10">
+                                <option value="20">
+                                <option value="30">
+                                <option value="45">
+                                <option value="60">
+                                <option value="90">
+                                <option value="120">
+                                <option value="180">
+                                <option value="240">
+                            </datalist>
+                        </div>
+
+
+                        <!-- تاریخ سررسید -->
+                        <div class="form-group">
+                            <label for="due_date">تاریخ سررسید:</label>
+                            <div class="due-box" id="due-picker">
+                                <div class="due-indicator">
+                                    <p id="due-display">نامشخص</p>
+                                </div>
+                                <img src="{% static 'frontend/img/calendar-date.svg' %}" alt="">
+                            </div>
+                            <input type="hidden" id="due_date" name="due_date" class="cal-input">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+            
+        </div>
+    
+        <div class="resp-box">
+            <div class="resp-header">
+                <div class="mask"></div>
+                <div class="resp-bar">
+                    <div class="bar1"></div>
+                </div>
+                <div class="title">
+                    <p>فعالیت های من</p>
+
+                </div>
+                
+            </div>
+            
+            <div class="resp-body">
+                <div class="calendar">
+                    <input
+                    type="text"
+                    data-jdp
+                    placeholder="لطفا یک تاریخ وارد نمایید"
+                    data-jdp-only-date
+                    />
+                    <input
+                        type="text"
+                        data-jdp
+                        data-jdp-min-date="today"
+                        placeholder="نمایش تاریخ از امروز"
+                        data-jdp-only-date
+                    />
+                    <input
+                        type="text"
+                        data-jdp
+                        data-jdp-max-date="today"
+                        placeholder="نمایش تاریخ تا امروز"
+                        data-jdp-only-date
+                    />
+                    <input
+                        type="text"
+                        data-jdp
+                        data-jdp-max-date="1400/05/10"
+                        placeholder="نمایش تاریخ تا 1400/05/10"
+                        data-jdp-only-date
+                    />
+                    <input type="text" data-jdp placeholder="انتخاب تاریخ و زمان" />
+                    <input
+                        type="text"
+                        data-jdp
+                        placeholder="امکان انتخاب فقط زمان"
+                        data-jdp-only-time
+                    />
+                    
+               </div>
+                <div class="mask"></div>
+            </div>
+            <div class="resp-footer">
+                <div class="mask"></div>
+                <div class="sec  sec1">
+                    <img src="{% static 'frontend/img/more_vert_29dp_000000_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                    <p>بیشتر</p>
+                </div>
+                <div class="sec  sec2">
+                    <img src="{% static 'frontend/img/edit_note_44dp_000000_FILL0_wght0_GRAD0_opsz48.svg' %}" alt="">
+                    <p>یادداشت</p>
+                </div>
+                <div class="sec  sec3">
+                    <img src="{% static 'frontend/img/stacks_31dp_000000_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                    <p>ترتیب</p>
+                </div>
+                <div class="sec  sec4">
+                    <img src="{% static 'frontend/img/calendar_month_44dp_000000_FILL0_wght0_GRAD0_opsz48.svg' %}" alt="">
+                    <p>تقویم</p>
+                </div>
+
+                <div class="more ">
+                    <div class="header">
+                        <a href="" class="logout">
+                            <p>خروج از حساب کاربری</p>
+                        </a>
+
+                        
+                    </div>
+                    <div class="body body1">
+                        <div class="child">
+                            <img src="{% static 'frontend/img/settings_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                            <p>تنظیمات</p>
+                        </div>
+                        <div class="child">
+                            <img src="{% static 'frontend/img/info_30dp_000000_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                            <p>اطلاعات</p>
+                        </div>
+                        <div class="child">
+                            <img src="{% static 'frontend/img/help_30dp_000000_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                            <p>حمایت</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="resp-menu">
+
+            <header>
+                <img src="{% static '' %}" alt="">
+                <div class="profile">
+                    <div class="name">فضای کاری من
+                        <ul class="bar " >
+                            <div class="child child1">
+                                <p>فضای کاری من</p>
+                            </div>
+                            <div class="child child2">
+                                <img src="{% static 'frontend/img/settings_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                            </div>
+                            <div class="child child3">
+                                <p>تنظیمات محیط کاری</p>
+                            </div>
+                            <div class="child child4">
+                                <img src="{% static 'frontend/img/add_box_28dp_000000_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                            </div>
+                            <div class="child child5">
+                                <p>ایجاد برنامه</p>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="arrow">
+                        <img src="{% static 'frontend/img/keyboard_arrow_down_30dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                    </div>
+                </div>
+            </header>
+            <div class="resp-section1">
+                <div class="box">
+                    <div class="child child1">
+                        <div class="searchbox">
+                            <img src="{% static 'frontend/img/search_25dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                            <input type="search" class="search" placeholder="جستجو...">
+                        </div>
+                    </div>
+                    <div class="child child2">
+                        <div>فعالیت های من</div>
+                    </div>
+                    <div class="child child3"></div>
+                    <div class="child child4"></div>
+                    <div class="child child5"></div>
+                    <div class="child child6"></div>
+                    <div class="child child7"></div>
+                    <div class="child child8"></div>
+                    <div class="child child9"></div>
+                    <div class="child child10"></div>
+                    <div class="child child11"></div>
+                    <div class="child child12"></div>
+                </div>
+                
+
+            </div>
+        </div>
+        
+        
+        
+    </div>
+
+    
+
+
+        
+        <script src="{% static 'frontend/libs/jquery.min.js' %}"></script>
+        <script src="{% static 'frontend/main-page.js' %}"></script>
+        <script src="{% static 'frontend/search-input.js' %}"></script>
+        <script src="{% static 'frontend/libs/persian-date.min.js' %}"></script>
+        <script src="{% static 'frontend/libs/persian-datepicker.min.js' %}"></script>
+
+        <script>
+            $(document).ready(function () {
+
+                $("#schedule-picker").pDatepicker({
+
+                autoClose: true,
+
+                onSelect: function (unix) {
+
+                    const gregorianDate = new persianDate(unix)
+                        .toDate()
+                        .toISOString()
+                        .split("T")[0];
+
+                    const jalaliDate = new persianDate(unix)
+                        .format("YYYY/MM/DD");
+
+                    $("#schedule").val(gregorianDate);
+
+                    $("#schedule-display").text(jalaliDate);
+                }
+            });
+                
+            });
+
+
+
+
+            $(document).on('focus', '.cal-input', function () {
+
+            setTimeout(function () {
+
+            var dp = $('.pwt-datepicker-container');
+
+            if (dp.length) {
+                $('body').append(dp);
+            }
+
+             }, 10);
+
+        });
+
+
+
+        // 🔹 تاریخ سررسید
+        $("#due-picker").pDatepicker({
+
+            format: "YYYY/MM/DD",
+            autoClose: true,
+            initialValue: false,
+            position: [-280, 0],
+
+            onSelect: function (unix) {
+
+                const jalaliDate = new persianDate(unix)
+                    .format("YYYY/MM/DD");
+
+                const gregorianDate = new persianDate(unix)
+                    .toDate()
+                    .toISOString()
+                    .split("T")[0];
+
+                $("#due-display").text(jalaliDate);
+
+                $("#due_date").val(gregorianDate);
+            }
+        });
+
+
+
+
+
+
+        // 🔹 آیکون ساعت برای datalist
+        document.querySelector(".time-box img").addEventListener("click", function () {
+            const input = document.getElementById("estimated_time");
+            input.focus();
+            const val = input.value;
+            input.value = "";
+            input.dispatchEvent(new Event("input", { bubbles: true }));
+            input.value = val;
+        });
+
+        const successMessage = document.querySelector(".success-message");
+
+        if (successMessage) {
+            setTimeout(function () {
+
+                successMessage.style.opacity = "0";
+                successMessage.style.transform = "translate(-50%, -20px)";
+
+                setTimeout(function () {
+                    successMessage.remove();
+                }, 400);
+
+            }, 1500);
+        }
+            
+        
+        function toPersianDigits(value) {
+            return value.toString().replace(/\d/g, function(digit) {
+                return "۰۱۲۳۴۵۶۷۸۹"[digit];
+            });
+        }
+        
+        
+        document.querySelectorAll(".schedule-date").forEach(function(element) {
+
+            const gregorianDate = element.dataset.date;
+
+            if (gregorianDate) {
+                const jalaliDate = new persianDate(gregorianDate)
+                    .format("YYYY/MM/DD");
+
+                element.textContent = toPersianDigits(jalaliDate);
+            }
+
+        });
+
+
+        document.querySelectorAll(".due-date").forEach(function(element) {
+
+            const gregorianDate = element.dataset.date;
+
+            if (gregorianDate) {
+                const jalaliDate = new persianDate(gregorianDate)
+                    .format("YYYY/MM/DD");
+
+                element.textContent = toPersianDigits(jalaliDate);
+            }
+
+        });
+
+        document.querySelectorAll(".estimated_time").forEach(function(element) {
+            element.textContent = toPersianDigits(element.textContent);
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            document.addEventListener("submit", function (event) {
+
+                if (!event.target.matches(".delete-task-form")) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                const form = event.target;
+                const taskRow = form.closest(".title");
+
+                fetch(form.action, {
+                    method: "POST",
+                    body: new FormData(form),
+                })
+                .then(response => {
+
+                    if (!response.ok) {
+                        throw new Error("Delete failed");
+                    }
+
+                    taskRow.remove();
+
+                })
+                .catch(error => {
+                    console.error("Delete error:", error);
+                });
+
+            });
+
+        });
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            document.addEventListener("submit", function (event) {
+
+                if (!event.target.matches(".delete-note-form")) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                const form = event.target;
+                const noteRow = form.closest(".title2");
+
+                fetch(form.action, {
+                    method: "POST",
+                    body: new FormData(form),
+                })
+                .then(response => {
+
+                    if (!response.ok) {
+                        throw new Error("Delete failed");
+                    }
+
+                    noteRow.remove();
+
+                })
+                .catch(error => {
+                    console.error("Delete error:", error);
+                });
+
+            });
+
+        });
+
+    
+        </script>
+    
+</body>
+</html>
